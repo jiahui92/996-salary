@@ -101,6 +101,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var g0 = _vm.hourlyPayInLawCpt.toFixed(0)
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        g0: g0
+      }
+    }
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -205,6 +214,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
 {
   components: { UniPopup: _UniPopup },
   data: function data() {
@@ -224,13 +239,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     // 时薪
     // hourlyPayCpt() {
     //     const totalHoursPerYear = this.daysPerWeek * this.hoursPerDay * 52;
-    //     return parseInt(this.annualSalaryCpt / totalHoursPerYearCpt) || 0;
+    //     return this.annualSalaryCpt / totalHoursPerYearCpt || 0;
     // },
     // 时薪: 考虑加班费
     hourlyPayInLawCpt: function hourlyPayInLawCpt() {
-      this.isShowResult = false;
       var totalHoursPerYear = this.getHoursPerWeekInLaw(this.hoursPerDay, this.daysPerWeek) * 52;
-      return parseInt(this.annualSalaryCpt / totalHoursPerYear) || 0;
+      return this.annualSalaryCpt / totalHoursPerYear || 0;
     },
     // 每周加班时长
     overtimePerWeekCpt: function overtimePerWeekCpt() {

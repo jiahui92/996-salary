@@ -1,5 +1,6 @@
 <template>
     <view class="page-content">
+        <image class="image-icu" src="../../static/996icu.png" />
         <view class="field-wrap">
             <view class="input-field">
                 <view>月薪</view>
@@ -21,6 +22,11 @@
         
         <button class="btn-show-result" @click="showResult">开始计算</button>
         
+        <view class="help">
+            <view>1. 计算说明：时薪计算默认考虑加班费；所谓加班费指正常工作日加班1.5倍工资（时薪），周六日加班2倍工资，但本应用不考虑法定节假日3倍工资的情况。</view>
+            <view>2. “996”表示早上9点上班，晚上9点下班，每周工作6天；“9116”表示早上9点上班，晚上11点下班，每周工作6天；“007”表示每周7天24小时上班。</view>
+        </view>
+        
         <UniPopup ref="popup">
             <view class="popup-result">
                 <view class="result-base">
@@ -31,7 +37,7 @@
                     </view>
                     <view>
                         时薪
-                        <text>{{ hourlyPayInLawCpt }}</text>
+                        <text>{{ hourlyPayInLawCpt.toFixed(0) }}</text>
                         元，年薪
                         <text>{{ annualSalaryCpt }}</text>
                         元
@@ -91,13 +97,12 @@ export default {
         // 时薪
         // hourlyPayCpt() {
         //     const totalHoursPerYear = this.daysPerWeek * this.hoursPerDay * 52;
-        //     return parseInt(this.annualSalaryCpt / totalHoursPerYearCpt) || 0;
+        //     return this.annualSalaryCpt / totalHoursPerYearCpt || 0;
         // },
         // 时薪: 考虑加班费
         hourlyPayInLawCpt() {
-            this.isShowResult = false;
             const totalHoursPerYear = this.getHoursPerWeekInLaw(this.hoursPerDay, this.daysPerWeek) * 52;
-            return parseInt(this.annualSalaryCpt / totalHoursPerYear) || 0;
+            return this.annualSalaryCpt / totalHoursPerYear || 0;
         },
         // 每周加班时长
         overtimePerWeekCpt() {
@@ -150,6 +155,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.page-content {
+    text-align: center;
+}
+.image-icu {
+    height: 300rpx;
+    width: 300rpx;
+}
+
 .field-wrap {
     display: flex;
     flex-flow: row wrap;
@@ -172,6 +185,19 @@ export default {
             height: 80rpx;
             border-bottom: 2rpx solid #EEE;
         }
+    }
+}
+
+.help {
+    color: white;
+    opacity: 0.8;
+    margin-top: 40rpx;
+    padding: 20rpx;
+    text-align: left;
+    
+    view {
+        text-indent: 50rpx;
+        margin-bottom: 20rpx;
     }
 }
 

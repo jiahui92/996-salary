@@ -7,6 +7,12 @@
 				"navigationBarTitleText": "996工资时薪计算器"
 			}
 		}
+        // {
+        // 	"path": "pages/help/index",
+        // 	"style": {
+        // 		"navigationBarTitleText": "帮助说明"
+        // 	}
+        // }
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
