@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "996工资时薪计算器",
-  "usingComponents": {
-    "uni-popup": "/node-modules/@dcloudio/uni-ui/lib/uni-popup/uni-popup"
-  }
-}
