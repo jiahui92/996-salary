@@ -11,10 +11,23 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 /*每个页面公共css */ 
-/* .uni-body {
-	background: black;
+
+/* 兼容pc的UI */
+// html {
+//     // font-size: 20px !important;
+    
+//     .page-content {
+//         max-width: 600rpx;
+//         margin: 0 auto;
+//     }
+// }
+page, .uni-body {
+	background: #de335e;
 	color: white;
-} */
+}
+.page-content {
+    padding: 10rpx;
+}
 </style>
