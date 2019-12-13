@@ -12,21 +12,23 @@
             </view>
             <view class="input-field">
                 <view>每周工作天数</view>
-                <input type="digit" v-model="daysPerWeek" placeholder="0.00" />
+                <input type="digit" v-model="daysPerWeek" placeholder="0.00" @focus="showInputTip('支持小数，大小周可以输入5.5')" @blur="hideInputTip" />
             </view>
             <view class="input-field">
                 <view>日均工作时长</view>
-                <input type="digit" v-model="hoursPerDay" placeholder="0.00" />
+                <input type="digit" v-model="hoursPerDay" placeholder="0.00" @focus="showInputTip('需减去吃饭休息时间')" @blur="hideInputTip" />
             </view>
         </view>
         
         <button class="btn-show-result" @click="showResult">开始计算</button>
         
         <view class="help">
-            <view>1. 计算说明：时薪计算默认考虑加班费；所谓加班费指正常工作日加班1.5倍工资（时薪），周六日加班2倍工资，但本应用不考虑法定节假日3倍工资的情况。</view>
-            <view>2. “996”表示早上9点上班，晚上9点下班，每周工作6天；“9116”表示早上9点上班，晚上11点下班，每周工作6天；“007”表示每周7天24小时上班。</view>
+            <view>1. “996”表示早上9点上班，晚上9点下班，每周工作6天；“9116”表示早上9点上班，晚上11点下班，每周工作6天；“007”表示每周7天24小时上班。</view>
+            <view>2. 计算说明：时薪计算默认考虑加班费；所谓加班费指正常工作日加班1.5倍工资（时薪），周六日加班2倍工资，但本应用不考虑法定节假日3倍工资的情况。</view>
+            <view>3. 计算误差：标准工时下8小时工作制包含休息时间在内，但本应用默认减掉中午和晚上1小时休息时间，两种计算方式通常相差5%~10%。</view>
+            <view class="right"> —— 凡多挣一分，自由就丧失一分</view>
         </view>
-        
+
         <UniPopup ref="popup">
             <view class="popup-result">
                 <view class="result-base">
@@ -44,7 +46,7 @@
                     </view>
                 </view>
                 
-                <view class="tip">* 下表为各种工作时长下，当前时薪应获得的工资</view>
+                <view class="tip">* 下表为各种工作时长下，当前时薪对应的工资</view>
                 
                 <view class="result-table">
                     <view class="line header">
@@ -71,8 +73,11 @@
                 </view>
             </view>
         </UniPopup>
-        
-        
+
+        <view v-if="inputTip" class="top-tip">
+            {{inputTip}}
+        </view>
+
     </view>
 </template>
 
@@ -82,11 +87,11 @@ export default {
     components: {UniPopup},
     data() {
         return {
-            salary: 15000,
-            yearEndAwards: 1,
+            salary: 10000,
+            yearEndAwards: 1.5,
             daysPerWeek: 5,
             hoursPerDay: 8,
-            isShowResult: false,
+            inputTip: ''
         };
     },
     computed: {
@@ -110,14 +115,14 @@ export default {
         },
         listCpt() {
             const list = [
-                { name: '955', hoursPerDay: 8, daysPerWeek: 5 },
-                { name: '965', hoursPerDay: 9, daysPerWeek: 5 },
-                { name: '995', hoursPerDay: 12, daysPerWeek: 5 },
-                // {name: '995.5', hoursPerDay: 12, daysPerWeek: 5.5},
-                { name: '9115', hoursPerDay: 14, daysPerWeek: 5 },
-                // {name: '966', hoursPerDay: 9, daysPerWeek: 6},
-                { name: '996', hoursPerDay: 12, daysPerWeek: 6 },
-                { name: '9116', hoursPerDay: 14, daysPerWeek: 6 },
+                { name: '955', hoursPerDay: 7, daysPerWeek: 5 },
+                { name: '965', hoursPerDay: 8, daysPerWeek: 5 },
+                { name: '995', hoursPerDay: 10, daysPerWeek: 5 },
+                // {name: '995.5', hoursPerDay: 10, daysPerWeek: 5.5},
+                { name: '9115', hoursPerDay: 12, daysPerWeek: 5 },
+                // {name: '966', hoursPerDay: 8, daysPerWeek: 6},
+                { name: '996', hoursPerDay: 10, daysPerWeek: 6 },
+                { name: '9116', hoursPerDay: 12, daysPerWeek: 6 },
                 { name: '007', hoursPerDay: 24, daysPerWeek: 7 }
             ];
 
@@ -149,6 +154,12 @@ export default {
         },
         showResult () {
             this.$refs.popup.open();
+        },
+        showInputTip (text) {
+            this.inputTip = text;
+        },
+        hideInputTip () {
+            this.inputTip = '';
         }
     }
 };
@@ -199,6 +210,26 @@ export default {
         text-indent: 50rpx;
         margin-bottom: 20rpx;
     }
+
+    .right {
+        text-align: right;
+        margin-top: 50rpx;
+        font-size: 30rpx;
+    }
+}
+
+.top-tip {
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: white;
+    width: 100%;
+    text-align: center;
+    background: black;
+    opacity: 0.9;
+    transition: opacity;
+    line-height: 60rpx;
+    font-size: 30rpx;
 }
 
 .popup-result {
