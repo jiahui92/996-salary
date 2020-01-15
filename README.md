@@ -1,12 +1,16 @@
 # 996工资计算器
 
+![微信二维码](https://raw.githubusercontent.com/jiahui92/996-salary/master/docs/qrcode_v2ex.jpg?token=AC463DV6FOSFGKYJN22OPOC6D2M7A)<br/>
+<img src="https://raw.githubusercontent.com/jiahui92/996-salary/master/docs/s1.png?token=AC463DU4CLCJVFLQ6ZD2PYK6D2NCU" height="400" style="margin-right: 10px;" />
+<img src="https://raw.githubusercontent.com/jiahui92/996-salary/master/docs/s2.png?token=AC463DTQUSAMP7FFLIM356K6D2NDQ" height="400" />
+
 ### tech
 * [uni-app](https://github.com/dcloudio/uni-app)
   * 项目打包发布时与编辑器HBuilder强绑定。。。
   * 创建出来的项目没有package.json，也就是说要用HBuilder去安装依赖
   * 兼容pc需要hack一段代码。。。
 
-### 启动
+### launch
 * 下载Hbuilder
 * 参照[uni-app](https://uniapp.dcloud.io/quickstart?id=%e8%bf%90%e8%a1%8cuni-app)文档进行操作
 
